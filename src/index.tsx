@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { RecoilRoot } from 'recoil';
+import { BrowserRouter } from 'react-router-dom';
 
 import ReactDOM from 'react-dom';
 import App from './App';
@@ -9,7 +10,9 @@ const queryClient = new QueryClient();
 ReactDOM.render(
     <RecoilRoot>
         <QueryClientProvider client={queryClient}>
-            <App />
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
         </QueryClientProvider>
     </RecoilRoot>,
     document.getElementById('root')
