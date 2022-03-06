@@ -1,11 +1,11 @@
 import { atom } from 'recoil';
 import { userType, registerType, loginType } from 'types/auth';
 
-export const userAtom = atom<null | userType>({
+export const userAtom = atom<userType>({
     key: 'user',
     default: {
-        email: '',
-        username: ''
+        email: null,
+        username: null
     }
 });
 

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Button from '../button/Button';
-import { modalType } from 'types/style/modal';
+import { modalType } from 'types/style/common';
 
 const Fullscreen = styled.div`
     position: fixed;

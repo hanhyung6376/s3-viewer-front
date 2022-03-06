@@ -1,4 +1,4 @@
-import { loginType, registerType } from 'types/auth';
+import { loginType, registerType, userType } from 'types/auth';
 
 export type useInputsType = {
     form?: any;
@@ -19,4 +19,9 @@ export type useRegisterType = {
     onChange: any;
     onSubmit: any;
     error: string | null;
+};
+
+export type useHeaderType = {
+    user: userType;
+    onLogout: any;
 };

@@ -11,6 +11,6 @@ export type loginType = {
 };
 
 export type userType = {
-    email: string;
-    username: string;
+    email: string | null;
+    username: string | null;
 };

@@ -32,6 +32,7 @@ const useLogin = () => {
             }
 
             if (auth) {
+                console.log(auth);
                 setError('success');
                 reset();
             }

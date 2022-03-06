@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import palette from 'lib/styles/index';
 import { Link } from 'react-router-dom';
-import { buttonStyleType } from 'types/style/button';
+import { buttonStyleType } from 'types/style/common';
 
 const buttonStyle = css<buttonStyleType>`
     border: none;
