@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 
-import { loginAtom } from 'state/auth';
+import { loginAtom } from 'theme/state/auth';
 import useInput from '../useInput';
 
 import { login as loginApi } from 'lib/api/auth';

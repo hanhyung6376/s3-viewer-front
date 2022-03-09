@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 
-import { registerAtom } from 'state/auth';
+import { registerAtom } from 'theme/state/auth';
 import useInput from '../useInput';
 import { register as registerApi } from 'lib/api/auth';
 
