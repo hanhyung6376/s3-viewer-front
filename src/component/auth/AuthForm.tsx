@@ -80,7 +80,7 @@ const AuthForm = ({ type, form, onChange, onSubmit, error }: authFormType) => {
     return (
         <AuthFormBlock>
             <h3>{text}</h3>
-            <form onSubmit={onSubmit}>
+            <form>
                 <StyledInput autoComplete="email" name="email" placeholder="아이디" onChange={onChange} value={form.email} />
                 {type === 'register' && (
                     <StyledInput
@@ -111,7 +111,7 @@ const AuthForm = ({ type, form, onChange, onSubmit, error }: authFormType) => {
                     />
                 )}
                 {error && <ErrorMessage>{error}</ErrorMessage>}
-                <ButtonWithMarginTop cyan fullWidth style={{ marginTop: '1rem' }}>
+                <ButtonWithMarginTop cyan fullWidth onClick={onSubmit} style={{ marginTop: '1rem' }}>
                     {text}
                 </ButtonWithMarginTop>
             </form>

@@ -1,3 +1,4 @@
+import { SyntheticEvent } from 'react';
 import { loginType, registerType, userType } from 'types/auth';
 
 export type useInputsType = {
@@ -10,14 +11,14 @@ export type useInputsType = {
 export type useLoginType = {
     form: loginType;
     onChange: any;
-    onSubmit: () => void;
+    onSubmit: (e: SyntheticEvent) => void;
     error: string | null;
 };
 
 export type useRegisterType = {
     form: registerType;
     onChange: any;
-    onSubmit: any;
+    onSubmit: (e: SyntheticEvent) => void;
     error: string | null;
 };
 

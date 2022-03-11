@@ -1,4 +1,4 @@
-import { userAtom } from 'theme/state/auth';
+import { userAtom } from 'state/auth';
 import { useRecoilState, useResetRecoilState } from 'recoil';
 import { userType } from 'types/auth';
 

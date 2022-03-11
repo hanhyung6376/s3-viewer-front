@@ -7,7 +7,7 @@ const Login = () => {
     const { form, onSubmit, onChange, error }: useLoginType = useLogin();
     return (
         <AuthTemplate>
-            <AuthForm type={'login'} form={form} onChange={onChange} onSubmit={onSubmit} error={error} />
+            <AuthForm type="login" form={form} onChange={onChange} onSubmit={onSubmit} error={error} />
         </AuthTemplate>
     );
 };

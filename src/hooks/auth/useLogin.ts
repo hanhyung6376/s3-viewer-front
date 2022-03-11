@@ -1,21 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, SyntheticEvent } from 'react';
 import { useMutation } from 'react-query';
 
-import { loginAtom } from 'theme/state/auth';
+import { loginAtom, userAtom } from 'state/auth';
 import useInput from '../useInput';
 
 import { login as loginApi } from 'lib/api/auth';
 
 import { useInputsType } from 'types/hooks';
+import { useRecoilState } from 'recoil';
 
 const useLogin = () => {
     const [error, setError] = useState<null | string>(null);
     const { form, onChange, reset }: useInputsType = useInput(loginAtom);
+    const [user] = useRecoilState(userAtom);
 
     const { data: auth, error: authError, mutate: loginQuery } = useMutation(loginApi);
-
-    const onSubmit: () => void = () => {
+    console.log(user);
+    const onSubmit = (e: SyntheticEvent) => {
         const { email, password }: any = form;
+        e.preventDefault();
 
         if ([email, password].includes('')) {
             setError('fill in the blank');
@@ -32,7 +35,9 @@ const useLogin = () => {
             }
 
             if (auth) {
-                console.log(auth);
+                localStorage.setItem('s3-user', JSON.stringify(auth.data, ['token']));
+                const { username, email } = auth.data;
+                console.log(username, email);
                 setError('success');
                 reset();
             }
