@@ -1,5 +1,7 @@
 import client from './client';
-import { keyType, bucketListType, fileType } from 'types/s3';
+import { keyType, bucketListType, fileType, addAppType } from 'types/s3';
+
+export const addApp = ({ appName }: addAppType) => client.post('s3/add_app', { appName });
 
 export const bucketList = ({ access, secret }: keyType) => client.post('s3/bucket_list', { access, secret });
 

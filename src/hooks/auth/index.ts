@@ -1,4 +1,5 @@
 import useLogin from './useLogin';
 import useRegister from './useRegister';
+import useAuth from './useAuth';
 
-export { useLogin, useRegister };
+export { useLogin, useRegister, useAuth };

@@ -14,3 +14,7 @@ export type userType = {
     email: string | null;
     username: string | null;
 };
+
+export type tokenType = {
+    token: string;
+};

@@ -10,7 +10,7 @@ client.interceptors.request.use((config) => {
     if (user) {
         const { token } = JSON.parse(user);
         // @ts-ignore
-        config.headers['access_token'] = token;
+        config.headers['token'] = token;
         return config;
     }
     return config;

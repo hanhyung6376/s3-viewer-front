@@ -12,10 +12,10 @@ import { useRecoilState } from 'recoil';
 const useLogin = () => {
     const [error, setError] = useState<null | string>(null);
     const { form, onChange, reset }: useInputsType = useInput(loginAtom);
-    const [user] = useRecoilState(userAtom);
+    const [, setUser] = useRecoilState(userAtom);
 
     const { data: auth, error: authError, mutate: loginQuery } = useMutation(loginApi);
-    console.log(user);
+
     const onSubmit = (e: SyntheticEvent) => {
         const { email, password }: any = form;
         e.preventDefault();
@@ -37,7 +37,7 @@ const useLogin = () => {
             if (auth) {
                 localStorage.setItem('s3-user', JSON.stringify(auth.data, ['token']));
                 const { username, email } = auth.data;
-                console.log(username, email);
+                setUser({ email: email, username: username });
                 setError('success');
                 reset();
             }
