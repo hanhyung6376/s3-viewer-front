@@ -1,4 +1,5 @@
 import { useEffect, useState, SyntheticEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useMutation } from 'react-query';
 
 import { loginAtom, userAtom } from 'state/auth';
@@ -13,8 +14,19 @@ const useLogin = () => {
     const [error, setError] = useState<null | string>(null);
     const { form, onChange, reset }: useInputsType = useInput(loginAtom);
     const [, setUser] = useRecoilState(userAtom);
+    const navigate = useNavigate();
 
-    const { data: auth, error: authError, mutate: loginQuery } = useMutation(loginApi);
+    const {
+        data: auth,
+        error: authError,
+        mutate: loginQuery
+    } = useMutation(loginApi, {
+        onSuccess: () => checkSuccess()
+    });
+
+    const checkSuccess = () => {
+        navigate('/main');
+    };
 
     const onSubmit = (e: SyntheticEvent) => {
         const { email, password }: any = form;
