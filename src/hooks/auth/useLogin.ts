@@ -1,4 +1,4 @@
-import { useEffect, useState, SyntheticEvent } from 'react';
+import { useState, SyntheticEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from 'react-query';
 
@@ -16,16 +16,22 @@ const useLogin = () => {
     const [, setUser] = useRecoilState(userAtom);
     const navigate = useNavigate();
 
-    const {
-        data: auth,
-        error: authError,
-        mutate: loginQuery
-    } = useMutation(loginApi, {
-        onSuccess: () => checkSuccess()
+    const { mutate: loginQuery } = useMutation(loginApi, {
+        onSuccess: (data) => checkSuccess(data),
+        onError: (data) => onError(data)
     });
 
-    const checkSuccess = () => {
+    const checkSuccess = (authData: any) => {
+        localStorage.setItem('s3-user', JSON.stringify(authData.data, ['token']));
+        const { username, email } = authData.data;
+        setUser({ email: email, username: username });
+        setError('success');
+        reset();
         navigate('/main');
+    };
+
+    const onError = (authData: any) => {
+        setError('register failed');
     };
 
     const onSubmit = (e: SyntheticEvent) => {
@@ -39,24 +45,6 @@ const useLogin = () => {
 
         loginQuery({ email, password });
     };
-
-    useEffect(() => {
-        try {
-            if (authError) {
-                setError('register failed');
-            }
-
-            if (auth) {
-                localStorage.setItem('s3-user', JSON.stringify(auth.data, ['token']));
-                const { username, email } = auth.data;
-                setUser({ email: email, username: username });
-                setError('success');
-                reset();
-            }
-        } catch {
-            setError('register failed');
-        }
-    }, [auth, authError]);
 
     return { form, onSubmit, onChange, error };
 };

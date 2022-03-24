@@ -34,3 +34,15 @@ export type useAddApp = {
     onSubmit: (e: SyntheticEvent) => void;
     error: string | null;
 };
+
+export type useMainType = {
+    app?: string[];
+    isLoading?: boolean;
+    error?: any;
+    form?: any;
+    onChange?: any;
+    onSubmit?: any;
+    visible?: boolean;
+    onVisible?: () => void;
+    onCancel?: () => void;
+};

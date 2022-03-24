@@ -3,6 +3,7 @@ import MainLayout from 'layout/MainLayout';
 
 import Loadable from 'component/common/Loadable';
 const Test = Loadable(lazy(() => import('component/common/Test')));
+const Main = Loadable(lazy(() => import('views/main')));
 
 const MainRoutes = {
     path: '/',
@@ -11,6 +12,13 @@ const MainRoutes = {
         {
             path: '/main',
             element: <Test />
+        },
+        {
+            path: '/test',
+            element: <Main />
+        },
+        {
+            path: '/test/:app'
         }
     ]
 };

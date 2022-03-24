@@ -5,7 +5,7 @@ import { userType } from 'types/auth';
 const useHeader = () => {
     const [user] = useRecoilState<userType>(userAtom);
     const reset = useResetRecoilState(userAtom);
-    console.log(user);
+
     const onLogout = () => {
         reset();
         localStorage.removeItem('user');

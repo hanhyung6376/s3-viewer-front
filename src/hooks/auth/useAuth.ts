@@ -11,13 +11,8 @@ const useAuth = () => {
     const navigate = useNavigate();
     const { data, error } = useQuery('token', tokenRefresh, {
         retry: false,
-        onSuccess: () => checkSuccess(),
         onError: () => checkFailure()
     });
-
-    const checkSuccess = () => {
-        navigate('/main');
-    };
 
     const checkFailure = () => {
         navigate('/login');

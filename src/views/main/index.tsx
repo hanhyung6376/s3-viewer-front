@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
+import { useMain } from 'hooks/main';
 import styled from 'styled-components';
 import palette from 'lib/styles';
+import { RegistrationModal } from 'component/common/modal';
 import { Button } from 'component/common/button';
 import Responsive from 'component/common/Responsive';
 
@@ -38,17 +40,17 @@ const ItemBlock = styled.div`
 `;
 
 const PostItem = ({ post }: any) => {
-    const { user, title, _id }: any = post;
     return (
         <ItemBlock>
             <h2>
-                <Link to={`/@${user.username}/${_id}`}>{title}</Link>
+                <Link to={`/${post}`}>{post}</Link>
             </h2>
         </ItemBlock>
     );
 };
 
-const Main = ({ app, loading, error, showWriteButton }: any) => {
+const Main = () => {
+    const { app, isLoading, error, form, onChange, onSubmit, visible, onVisible } = useMain();
     // 에러 발생 시
     if (error) {
         console.log(error);
@@ -57,20 +59,19 @@ const Main = ({ app, loading, error, showWriteButton }: any) => {
     return (
         <ListBlock>
             <WriteButtonWrapper>
-                {showWriteButton && (
-                    <Button cyan to="/write">
-                        새 글 작성하기
-                    </Button>
-                )}
+                <Button cyan onClick={onVisible}>
+                    Add App
+                </Button>
             </WriteButtonWrapper>
             {/* 로딩 중이 아니고, 포스트 배열이 존재할 때만 보여 줌 */}
-            {!loading && app && (
+            {!isLoading && app && (
                 <div>
                     {app.map((data: any) => (
-                        <PostItem post={data} key={data._id} />
+                        <PostItem post={data} key={data} />
                     ))}
                 </div>
             )}
+            <RegistrationModal visible={visible} onChange={onChange} form={form} onSubmit={onSubmit} error={error} />
         </ListBlock>
     );
 };

@@ -1,4 +1,4 @@
-import { useEffect, useState, SyntheticEvent } from 'react';
+import { useState, SyntheticEvent } from 'react';
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,7 +13,20 @@ const useRegister = () => {
     const { form, onChange, reset }: useInputsType = useInput(registerAtom);
     const navigate = useNavigate();
 
-    const { data: auth, error: authError, mutate: registerQuery } = useMutation(registerApi);
+    const { mutate: registerQuery } = useMutation(registerApi, {
+        onSuccess: () => onSuccess(),
+        onError: () => onError()
+    });
+
+    const onSuccess = () => {
+        setError('success');
+        reset();
+        navigate('/');
+    };
+
+    const onError = () => {
+        setError('register failed');
+    };
 
     const onSubmit = (e: SyntheticEvent) => {
         e.preventDefault();
@@ -31,19 +44,6 @@ const useRegister = () => {
 
         registerQuery({ email, username, password });
     };
-
-    useEffect(() => {
-        console.log('---------------------------------------------------------------------');
-        if (authError) {
-            setError('register failed');
-        }
-
-        if (auth) {
-            setError('success');
-            reset();
-            navigate('/');
-        }
-    }, [auth, authError]);
 
     return { form, onSubmit, onChange, error };
 };
