@@ -43,7 +43,7 @@ const PostItem = ({ post }: any) => {
     return (
         <ItemBlock>
             <h2>
-                <Link to={`/${post}`}>{post}</Link>
+                <Link to={`/s3/${post}`}>{post}</Link>
             </h2>
         </ItemBlock>
     );

@@ -10,9 +10,11 @@ export type keyType = {
 };
 
 export type bucketListType = keyType & {
-    bucket: string;
+    bucket: string | undefined;
 };
 
-export type fileType = bucketListType & {
-    file: string;
+export type fileType = {
+    app?: string | undefined;
+    bucket?: string | undefined;
+    file?: string | undefined;
 };

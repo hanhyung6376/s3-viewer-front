@@ -1,4 +1,4 @@
 import useFileList from './useFileList';
-import useGetFile from './useGetFile';
+import useBucketList from './useBucketList';
 
-export { useFileList, useGetFile };
+export { useFileList, useBucketList };
