@@ -6,6 +6,7 @@ const Test = Loadable(lazy(() => import('component/common/Test')));
 const Main = Loadable(lazy(() => import('views/main')));
 const BucketList = Loadable(lazy(() => import('views/s3/BucketList')));
 const FileList = Loadable(lazy(() => import('views/s3/FileList')));
+const FileViewer = Loadable(lazy(() => import('views/s3/FileViewer')));
 
 const MainRoutes = {
     path: '/',
@@ -26,6 +27,10 @@ const MainRoutes = {
         {
             path: '/s3/:app/:bucket',
             element: <FileList />
+        },
+        {
+            path: '/s3/:app/:bucket/:file',
+            element: <FileViewer />
         }
     ]
 };
