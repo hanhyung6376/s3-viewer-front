@@ -39,11 +39,13 @@ const StyledInput = styled.input`
  * 폼 하단에 로그인 혹은 회원가입 링크를 보여줌
  */
 const Footer = styled.div`
+    display: flex;
+    justify-content: space-between;
     margin-top: 2rem;
     text-align: right;
     a {
         color: ${palette.gray[6]};
-        text-decoration: underline;
+        text-decoration: None;
         &:hover {
             color: ${palette.gray[9]};
         }
@@ -115,7 +117,10 @@ const AuthForm = ({ type, form, onChange, onSubmit, error }: authFormType) => {
                     {text}
                 </ButtonWithMarginTop>
             </form>
-            <Footer>{type === 'login' ? <Link to="/register">회원가입</Link> : <Link to="/login">로그인</Link>}</Footer>
+            <Footer>
+                {type === 'login' ? <Link to="/forgot">비밀번호 찾기</Link> : <Link to="/login"></Link>}
+                {type === 'login' ? <Link to="/register">회원가입</Link> : <Link to="/login">로그인</Link>}
+            </Footer>
         </AuthFormBlock>
     );
 };

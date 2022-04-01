@@ -2,9 +2,9 @@ import { useBucketList } from 'hooks/s3';
 import { Table } from 'component/common/table';
 
 const BucketList = () => {
-    const { columns, row } = useBucketList();
+    const { columns, row, onClick } = useBucketList();
 
-    if (row == []) {
+    if (row === []) {
         return (
             <>
                 <p>hi</p>
@@ -14,7 +14,7 @@ const BucketList = () => {
 
     return (
         <>
-            <Table columns={columns} data={row} />
+            <Table columns={columns} data={row} onClick={onClick} />
         </>
     );
 };

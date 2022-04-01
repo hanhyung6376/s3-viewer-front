@@ -1,10 +1,12 @@
 import { useState, useMemo } from 'react';
 import { useQuery } from 'react-query';
-import { Link, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { fileList } from 'lib/api/s3';
 
 const useFileList = () => {
     const [row, setRow] = useState<any>([]);
+    const navigate = useNavigate();
+
     const columns = useMemo(
         () => [
             {
@@ -28,12 +30,15 @@ const useFileList = () => {
     );
     const { app, bucket } = useParams();
 
+    const onClick = (params: string) => {
+        navigate(`${params}`);
+    };
     const preprocessing = (rowData: any) => {
         const pre: any = [];
         rowData.map((value: any) => {
             // @ts-ignore
             const preData = {
-                name: <Link to={`/s3/${app}/${bucket}/${value.Key}`}>{value.Key}</Link>,
+                name: value.Key,
                 lastModified: value.LastModified,
                 size: value.Size,
                 storageClass: value.StorageClass
@@ -47,7 +52,7 @@ const useFileList = () => {
         onSuccess: (body) => preprocessing(body.data.files)
     });
 
-    return { columns, row, isLoading, error };
+    return { columns, row, isLoading, error, onClick };
 };
 
 export default useFileList;

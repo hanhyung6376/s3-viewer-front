@@ -1,7 +1,7 @@
 import SearchBar from './SearchBar';
 import { useTable, useGlobalFilter } from 'react-table';
 
-const Table = ({ columns, data }: any) => {
+const Table = ({ columns, data, onClick }: any) => {
     // @ts-ignore
     const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, setGlobalFilter } = useTable(
         { columns, data },
@@ -27,9 +27,15 @@ const Table = ({ columns, data }: any) => {
                         prepareRow(row);
                         return (
                             <tr {...row.getRowProps()}>
-                                {row.cells.map((cell) => (
-                                    <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                                ))}
+                                {row.cells.map((cell) =>
+                                    cell.column.id === 'name' ? (
+                                        <td onClick={() => onClick(cell.value)} {...cell.getCellProps()}>
+                                            {cell.render('Cell')}
+                                        </td>
+                                    ) : (
+                                        <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                                    )
+                                )}
                             </tr>
                         );
                     })}
