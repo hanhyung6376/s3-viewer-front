@@ -49,7 +49,8 @@ const useFileList = () => {
     };
 
     const { error, isLoading } = useQuery('file-list', () => fileList({ app, bucket }), {
-        onSuccess: (body) => preprocessing(body.data.files)
+        onSuccess: (body) => preprocessing(body.data.files),
+        retry: false
     });
 
     return { columns, row, isLoading, error, onClick };

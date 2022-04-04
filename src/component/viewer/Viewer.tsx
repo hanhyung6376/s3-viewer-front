@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import palette from 'lib/styles/index';
 import Responsive from '../common/Responsive';
+import Button from '../common/button/Button';
 
 const PostViewerBlock = styled(Responsive)`
     margin-top: 4rem;
@@ -21,7 +22,7 @@ const PostContent = styled.div`
     color: ${palette.gray[8]};
 `;
 
-const Viewer = ({ fileName, body, error, loading }: any) => {
+const Viewer = ({ fileName, body, error, loading, onClick }: any) => {
     if (error) {
         return <PostViewerBlock>존재하지 않는 포스트입니다.</PostViewerBlock>;
     }
@@ -35,6 +36,7 @@ const Viewer = ({ fileName, body, error, loading }: any) => {
             <PostHead>
                 <h1>{fileName}</h1>
             </PostHead>
+            <Button onClick={onClick}>다운로드</Button>
             <PostContent dangerouslySetInnerHTML={{ __html: body }} />
         </PostViewerBlock>
     );

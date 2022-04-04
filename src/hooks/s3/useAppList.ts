@@ -7,7 +7,8 @@ const useAppList = () => {
     const [list, setList] = useState<string[]>([]);
     const navigate = useNavigate();
     const { isLoading } = useQuery('app-list', appList, {
-        onSuccess: (data) => setList(data.data.app)
+        onSuccess: (data) => setList(data.data.app),
+        retry: false
     });
 
     const onClick = (value: string) => {

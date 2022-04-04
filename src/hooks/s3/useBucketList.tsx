@@ -39,9 +39,9 @@ const useBucketList = () => {
     };
 
     const { isLoading } = useQuery('bucket-list', () => bucketList({ app }), {
-        onSuccess: (body) => preprocessing(body.data.buckets)
+        onSuccess: (body) => preprocessing(body.data.buckets),
+        retry: false
     });
-    console.log(row);
 
     return { columns, row, isLoading, onClick };
 };
